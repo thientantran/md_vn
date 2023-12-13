@@ -1,4 +1,13 @@
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { routes } from "@/constants/blogMenu";
 import Image from "next/image";
 import BlogMenuItem from "./BlogMenuItem";
@@ -8,12 +17,11 @@ export default function BlogNavbar() {
   return (
     <div className="p-4 max-w-screen-2xl mx-auto h-full flex justify-between items-center bg-white shadow-sm">
       <BlogMobileSidebar/>
-      <div className="p-6">
+      <div>
         <Image height={130} width={130} alt="logo" src='/logo.svg'/>
       </div>
-      
-      <div class="justify-between hidden md:flex md:w-auto" id="navbar-sticky">
-        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+      <div className="justify-between hidden md:flex md:w-auto" id="navbar-sticky">
+        <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           {
             routes.map((route) => (
               <li key={route.label}>
@@ -35,8 +43,21 @@ export default function BlogNavbar() {
           </li> */}
         </ul>
       </div>
-      <div className="">
-        Avatar
+      <div>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Logout</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
       </div>
     </div>
   )

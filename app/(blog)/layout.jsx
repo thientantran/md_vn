@@ -10,7 +10,7 @@ export default function layout({children}) {
       <div className="hidden h-full flex-col fixed inset-y-0 z-50">
         <BlogSidebar/>
       </div>
-      <main className='mt-[80px]  h-full'>
+      <main className='pt-[80px] max-w-screen-2xl mx-auto h-full'>
         {children}
       </main>
     </div>
