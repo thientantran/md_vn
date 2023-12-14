@@ -1,8 +1,9 @@
+import BlogFeature from "@/components/blog/BlogFeature";
 
 export default function page() {
   return (
-   <>
-    Main
-   </>
+   <div className="p-4">
+    <BlogFeature/>
+   </div>
   )
 }
