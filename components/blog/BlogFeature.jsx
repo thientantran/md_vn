@@ -21,6 +21,7 @@ export default function BlogFeature() {
           <button className='px-1 py-2 md:py-4 border bg-gray-300 md:px-5 rounded-md w-max hover:bg-gray-200 transition-all duration-500'>Read More</button>
         </div>
       </div>
+      <hr className="mt-[20px]"/>
     </div>
   )
 }
