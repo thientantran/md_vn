@@ -5,6 +5,9 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "img.medscapestatic.com",
+      },{
+        protocol: "https",
+        hostname: 'github.com',
       }
     ]
   }

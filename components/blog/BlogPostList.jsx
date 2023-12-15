@@ -4,7 +4,7 @@ import BlogPost from "./BlogPost";
 export default function BlogPostList() {
   return (
     <div className="md:flex-[5]">
-      <div className="text-xl md:text-4xl font-semibold">
+      <div className="text-xl md:text-2xl font-semibold">
         News
       </div>
       <BlogPost/>

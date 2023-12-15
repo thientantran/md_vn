@@ -15,7 +15,7 @@ import BlogMobileSidebar from "./BlogMobileSidebar";
 
 export default function BlogNavbar() {
   return (
-    <div className="p-4 max-w-screen-2xl mx-auto h-full flex justify-between items-center bg-white shadow-sm">
+    <div className="p-4 max-w-screen-xl mx-auto h-full flex justify-between items-center bg-white shadow-sm">
       <BlogMobileSidebar/>
       <div>
         <Image height={130} width={130} alt="logo" src='/logo.svg'/>

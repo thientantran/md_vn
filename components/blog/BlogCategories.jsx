@@ -3,7 +3,7 @@ import BlogCategoryItem from "./BlogCategoryItem";
 export default function BlogCategories({categories}) {
   return (
     <div className="mt-[30px]">
-      <div className="text-xl md:text-4xl font-semibold">
+      <div className="text-xl md:text-2xl font-semibold">
         Popular Categories
       </div>
       <div className="flex justify-center">

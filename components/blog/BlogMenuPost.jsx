@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,14 +10,14 @@ export default function BlogMenuPost() {
           </div>
           <div className="flex-[4]">
             <div className="flex items-center mb-1">
-              <Button variant='primary' className="px-2 text-[10.5px] xl:text-sm">Cardiology</Button>
+              <button className="border px-2 py-2 rounded-full bg-sky-700 text-primary-foreground hover:bg-sky-700/90 text-[6px] md:text-[10px]">Cardiology</button>
             </div>
-            <Link className="text-[12px] md:text-sm lg:text-[16px] xl:text-lg text-gray-700 font-bold hover:text-gray-600" href="/blog">How Should We Treat GERD Associated With a Chronic Cough?</Link>
+            <Link className="text-[12px] md:text-sm text-gray-700 font-bold hover:text-gray-600" href="/blog">How Should We Treat GERD Associated With a Chronic Cough?</Link>
             <div className="flex justify-between items-center mt-1">
               <div className="flex items-center" >
-                <span className="font-light text-[10.5px] xl:text-sm text-gray-600">December 14, 2023</span>
+                <span className="font-light text-[6px] md:text-[10px] text-gray-600">December 14, 2023</span>
                 <span className="ml-2"> - </span>
-                <h1 className="ml-2 text-gray-700 text-[10.5px] xl:text-sm font-bold">Thiên Tân Trần</h1>
+                <h1 className="ml-2 text-gray-700 text-[6px] md:text-[10px] font-bold">Thiên Tân Trần</h1>
               </div>
             </div>
           </div>
