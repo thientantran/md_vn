@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function BlogPost() {
   return (
-      <div className="max-w-5xl px-2 sm:px-4 md:px-6 lg:px=8 my-1 md:my-4 py-3 sm:py-6 bg-white rounded-lg shadow-md">
+      <div className="px-2 sm:px-4 md:px-6 lg:px=8 my-1 md:my-4 py-3 sm:py-6 bg-white rounded-lg shadow-md">
         <div className="flex justify-between items-center">
           <span className="text-xs md:text-sm font-light text-gray-600">December 14, 2023</span>
           <Button variant='ghost'  className="px-2 py-1 border font-bold text-xs md:text-sm">Cardiology</Button>
@@ -24,7 +24,6 @@ export default function BlogPost() {
             <div className="h-6 w-6 md:h-10 md:w-10 relative">
               <Image src="https://github.com/shadcn.png" alt="avatar" fill className="rounded-full object-cover"/>
             </div>
-            
 
             <h1 className="ml-4 text-xs sm:text-sm md:text-base text-gray-700 font-bold">Thiên Tân Trần</h1>
           </div>

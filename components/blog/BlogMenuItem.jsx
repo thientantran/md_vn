@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { usePathname, useRouter } from "next/navigation"
 export default function BlogMenuItem({label, href}) {
   const pathname = usePathname()
-  const isActive = (pathname === "/" && href==="/") || pathname === href || pathname?.startsWith(`${href}/`)
+  const isActive = (pathname === "/" && href==="/") || pathname === href || pathname?.startsWith(`${href}/`) || (pathname?.startsWith("/news") && label=="News")
   const router = useRouter()
   const onClick = () => {
     router.push(href);
