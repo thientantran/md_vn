@@ -1,7 +1,16 @@
 import { Button } from '@/components/ui/button'
+import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 
-export default function BlogPostComment() {
+export default async function BlogPostComment() {
+  const session = await getServerSession()
+  if(!session){
+    return (
+      <div>
+        Đăng nhập để đọc bình luận
+      </div>
+    )
+  }
   return (
     <section className="mt-4">
               <div className="flex justify-between items-center mb-6">

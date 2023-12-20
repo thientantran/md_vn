@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from 'zod';
@@ -12,6 +15,7 @@ const formSchema = z.object({
   email: z.string().email({message: 'Email không đúng định dạng'}).min(1, {
     message: "email is required!"
   }),
+  name:z.string().min(1, {message: "Tên người dùng là bắt buộc"}),
   password: z.string().min(6, {
     message: "password too short"
   }),
@@ -49,11 +53,32 @@ export default function AuthPage() {
   })
 
   const {isSubmitting, isValid} = form.formState
-  const onSubmit = (values) => {
+  const router = useRouter()
+  const login = async (values) => {
+    const {email, password} = values
     try {
-      console.log(values)
+      await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+        callbackUrl:'/'
+      })
+      router.push("/")
     } catch (error) {
-      console.log(error)
+      console.log('ERROR: ',error)
+    }
+  }
+  const register = async (values) => {
+    const {email,name, password} = values
+    try {
+      await axios.post('/api/register', {
+        email,
+        name,
+        password
+      });
+
+    } catch (error) {
+        console.log(error);
     }
   }
   return (
@@ -63,7 +88,7 @@ export default function AuthPage() {
       <div className="flex items-center justify-center w-full lg:p-12">
         <div className="flex items-center p-6 xl:p-10 shadow-lg rounded-md">
           <Form {...form}>
-            <form className="flex flex-col w-full h-full pb-6 bg-white rounded-3xl" onSubmit={form.handleSubmit(onSubmit)}>
+            <form className="flex flex-col w-full h-full pb-6 bg-white rounded-3xl" onSubmit={form.handleSubmit(variant ==='login' ? login : register)}>
               <h3 className="mb-3 text-center text-4xl font-extrabold text-dark-grey-900"> {variant === 'login' ? 'Sign In' : 'Register'}</h3>
               <p className="mb-4 text-grey-700 text-center">Enter your email and password</p>
               {/* GOOGLE
@@ -90,6 +115,22 @@ export default function AuthPage() {
                   </FormItem>
                 )}
               />
+              <div className='my-1'></div>
+              {variant !== "login" && (
+                <FormField
+                control={form.control}
+                name='name'
+                render = {({field}) => (
+                  <FormItem>
+                    <FormLabel>User Name</FormLabel>
+                    <FormControl>
+                      <Input type='text' placeholder='User Name' disabled={isSubmitting} {...field}/>
+                    </FormControl>
+                    <FormMessage/>
+                  </FormItem>
+                )}
+              />
+              )}
               <div className='my-1'></div>
               <FormField
                 control={form.control}
@@ -120,7 +161,7 @@ export default function AuthPage() {
                 )}
               />
               )}
-              <Button type='submit' className='px-6 py-5 mt-4 font-bold mb-5 w-80 md:w-96' variant='primary'>
+              <Button disabled={isSubmitting} type='submit' className='px-6 py-5 mt-4 font-bold mb-5 w-80 md:w-96' variant='primary'>
                 Sign In
               </Button>
               {/* <button className="w-full px-6 py-5 mb-5 text-sm font-bold leading-none bg-sky-700 text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">Sign In</button> */}
