@@ -82,13 +82,13 @@ export default function AuthPage() {
     }
   }
   return (
-    <div className="bg-white rounded-lg py-5">
-  <div className="flex flex-col bg-white rounded-lg pt-12 my-5">
+    <div className="bg-white rounded-lg h-full">
+  <div className="flex flex-col bg-white rounded-lg h-full">
     <div className="flex justify-center w-full h-full my-auto">
-      <div className="flex items-center justify-center w-full lg:p-12">
+      <div className="flex items-center justify-center w-full">
         <div className="flex items-center p-6 xl:p-10 shadow-lg rounded-md">
           <Form {...form}>
-            <form className="flex flex-col w-full h-full pb-6 bg-white rounded-3xl" onSubmit={form.handleSubmit(variant ==='login' ? login : register)}>
+            <form className="flex flex-col w-full h-full pb-3 bg-white rounded-3xl" onSubmit={form.handleSubmit(variant ==='login' ? login : register)}>
               <h3 className="mb-3 text-center text-4xl font-extrabold text-dark-grey-900"> {variant === 'login' ? 'Sign In' : 'Register'}</h3>
               <p className="mb-4 text-grey-700 text-center">Enter your email and password</p>
               {/* GOOGLE
