@@ -13,7 +13,6 @@ export default function page() {
       <hr />
     <BlogCategories categories={categories}/>
     <BlogFeature/>
-    
     <div className="flex gap-x-10 mt-[30px]">
       <BlogPostList/>
       <BlogMenu/>
