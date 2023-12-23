@@ -1,3 +1,4 @@
+import ToastProvider from "@/components/ToastProvider";
 import BlogNavbar from "@/components/blog/BlogNavbar";
 import BlogSidebar from "@/components/blog/BlogSidebar";
 
@@ -11,6 +12,7 @@ export default function layout({children}) {
         <BlogSidebar/>
       </div>
       <main className='pt-[80px] max-w-screen-xl mx-auto h-full'>
+        <ToastProvider/>
         {children}
       </main>
     </div>
