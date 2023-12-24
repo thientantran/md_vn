@@ -1,4 +1,5 @@
 import IconBadge from '@/components/IconBadge'
+import TitleForm from '@/components/TitleForm'
 import prismadb from '@/lib/prisma'
 import { LayoutDashboard } from "lucide-react"
 import { getServerSession } from 'next-auth'
@@ -39,14 +40,15 @@ export default async function page({params}) {
           </span>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-6 mt-16 md:grid-cols-2">
+      <div className="flex items-center mt-8 gap-x-2">
+        <IconBadge variant='success' icon={LayoutDashboard}/>
+        <h2 className="text-xl">
+          Customize your Post
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div>
-          <div className="flex items-center gap-x-2">
-            <IconBadge variant='success' icon={LayoutDashboard}/>
-            <h2 className="text-xl">
-              Customize your Post
-            </h2>
-          </div>
+          <TitleForm initialData={post} postId={post.id}/>
         </div>
       </div>
     </div>
