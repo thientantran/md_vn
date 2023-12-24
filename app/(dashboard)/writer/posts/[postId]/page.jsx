@@ -1,3 +1,4 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import IconBadge from '@/components/IconBadge'
 import TitleForm from '@/components/TitleForm'
 import prismadb from '@/lib/prisma'
@@ -5,10 +6,11 @@ import { LayoutDashboard } from "lucide-react"
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 export default async function page({params}) {
-  const  session = await getServerSession()
+  const session = await getServerSession(authOptions)
   if(!session){
     return redirect("/")
   }
+  console.log("SESSION: ", session.user.role)
   const post = await prismadb.post.findUnique({
     where: {
       id: params.postId

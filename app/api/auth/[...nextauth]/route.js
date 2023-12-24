@@ -52,10 +52,49 @@ export const authOptions = {
   debug: process.env.NODE_ENV === 'development',
   adapter: PrismaAdapter(prismadb),
   session: { strategy: 'jwt' },
+  // callbacks: {
+  //   session: async (session) => {
+  //     // Fetch user roles from your database and add them to the session
+  //     const role = await fetchUserRole(session.session.user.email);
+  //     session.session.user.role = role;
+  //     // console.log(session)
+  //     return Promise.resolve(session);
+  //     // return session
+  //   },
+  // },
+  
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
   },
-  secret: process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async jwt({ user , token }) {
+      
+      if (user) {  // Note that this if condition is needed
+        token.user={...user}
+      }
+      return token
+     },
+    async session({ session, token }) {
+      if (token?.user) { // Note that this if condition is needed
+        session.user = token.user;
+      }
+      return session
+    },
+  },
 };
 const handler = nextAuth(authOptions)
 export { handler as GET, handler as POST };
+
+async function fetchUserRole(email) {
+
+  const query = await prismadb.user.findUnique({
+    where: {
+      email: email
+    },
+  });
+
+
+  return query.role
+
+}

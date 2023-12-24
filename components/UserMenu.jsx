@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 
 export default function UserMenu() {
   const {data} = useSession()
+  console.log('CLIENT SESSION: ',data)
   const router = useRouter()
   if(!data){
     return (
@@ -27,6 +28,7 @@ export default function UserMenu() {
           <DropdownMenuLabel>{data.user?.name}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className='cursor-pointer'>Profile</DropdownMenuItem>
+          <DropdownMenuItem className='cursor-pointer'>{data.user?.role}</DropdownMenuItem>
           <DropdownMenuItem className='cursor-pointer' onClick={()=>signOut()}>Logout</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
