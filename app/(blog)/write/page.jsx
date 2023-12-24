@@ -6,10 +6,12 @@ import { createTitleSchema } from '@/lib/formSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-
+import toast from "react-hot-toast";
 
 export default function CreatePostPage() {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(createTitleSchema),
     defaultValues: {
@@ -17,9 +19,12 @@ export default function CreatePostPage() {
     }
   })
   const onSubmit = async (values) => {
+    
     try {
       // console.log(values)
       const response = await axios.post("/api/blog", values)
+      router.push(`/posts/${response.data.id}`)
+      toast.success("Course created")
     } catch (error) {
       console.log(error)
     }
