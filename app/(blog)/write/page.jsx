@@ -4,6 +4,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { createTitleSchema } from '@/lib/formSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
@@ -15,9 +16,10 @@ export default function CreatePostPage() {
       title: ""
     }
   })
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     try {
-      console.log(values)
+      // console.log(values)
+      const response = await axios.post("/api/blog", values)
     } catch (error) {
       console.log(error)
     }

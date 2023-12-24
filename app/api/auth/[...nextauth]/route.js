@@ -1,10 +1,10 @@
 import prismadb from '@/lib/prisma';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
-import NextAuth from 'next-auth';
+import nextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
-export const handler = NextAuth({
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
@@ -56,6 +56,6 @@ export const handler = NextAuth({
     secret: process.env.NEXTAUTH_SECRET,
   },
   secret: process.env.NEXTAUTH_SECRET
-});
-
+};
+const handler = nextAuth(authOptions)
 export { handler as GET, handler as POST };

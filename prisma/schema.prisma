@@ -62,24 +62,21 @@ model VerificationToken {
 }
 
 model Category {
-  id    String  @id @default(cuid()) @map("_id")
-  slug  String  @unique
-  title String
-  img   String?
+  id    String @id @default(cuid()) @map("_id")
+  name  String
   Posts Post[]
 }
 
 model Post {
   id          String    @id @default(cuid()) @map("_id")
   createdAt   DateTime  @default(now())
-  slug        String?   @unique
   title       String
   desc        String?
   img         String?
   isPublished Boolean   @default(false)
   views       Int       @default(0)
-  catSlug     String
-  cat         Category? @relation(fields: [catSlug], references: [slug])
+  categoryId  String?
+  category    Category? @relation(fields: [categoryId], references: [id])
   userEmail   String
   user        User      @relation(fields: [userEmail], references: [email])
   comments    Comment[]
@@ -91,6 +88,6 @@ model Comment {
   desc      String
   userEmail String
   user      User     @relation(fields: [userEmail], references: [email])
-  postSlug  String
-  post      Post     @relation(fields: [postSlug], references: [slug])
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
 }
