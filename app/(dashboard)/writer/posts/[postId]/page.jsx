@@ -2,6 +2,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import CategoryForm from '@/components/CategoryForm'
 import DetailEditor from '@/components/DetailEditor'
 import IconBadge from '@/components/IconBadge'
+import ImageForm from '@/components/ImageForm'
 import TitleForm from '@/components/TitleForm'
 import prismadb from '@/lib/prisma'
 import { BookPlus, LayoutDashboard } from "lucide-react"
@@ -61,6 +62,9 @@ export default async function page({params}) {
         </div>
         <div>
           <CategoryForm initialData={post} postId={post.id} options={categories.map((category)=> ({label: category.name, value:category.id }))}/>
+        </div>
+        <div>
+          <ImageForm initialData={post} postId={post.id}/>
         </div>
       </div>
       <div className="flex items-center mt-8 gap-x-2">

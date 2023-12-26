@@ -7,10 +7,11 @@ import { authOptions } from "../auth/[...nextauth]/route";
 // tutorial: https://docs.uploadthing.com/nextjs/appdir
 const f = createUploadthing();
 
-const handleAuth = () => {
-  const session = getServerSession(authOptions)
+const handleAuth = async() => {
+  const session = await getServerSession(authOptions)
+  console.log(session)
   if(!session) throw new Error("Unauthorized")
-  return session.user
+  return session.user.email
 }
 
 // FileRouter for your app, can contain multiple FileRoutes
