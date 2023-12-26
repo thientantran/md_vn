@@ -1,4 +1,5 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import CategoryForm from '@/components/CategoryForm'
 import IconBadge from '@/components/IconBadge'
 import TitleForm from '@/components/TitleForm'
 import prismadb from '@/lib/prisma'
@@ -19,6 +20,11 @@ export default async function page({params}) {
   if(!post){
     return redirect("/")
   }
+  const categories = await prismadb.category.findMany({
+    orderBy:{
+      name:'asc'
+    }
+  })
 
   const requiredFields = [
     post.title,
@@ -51,6 +57,9 @@ export default async function page({params}) {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <div>
           <TitleForm initialData={post} postId={post.id}/>
+        </div>
+        <div>
+          <CategoryForm initialData={post} postId={post.id} options={categories.map((category)=> ({label: category.name, value:category.id }))}/>
         </div>
       </div>
     </div>

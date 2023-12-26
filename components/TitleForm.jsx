@@ -1,4 +1,6 @@
 "use client";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -7,7 +9,6 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 import { Button } from "./ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "./ui/form";
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Title is required"
@@ -66,7 +67,7 @@ export default function TitleForm({
               render={({field})=>(
                 <FormItem>
                   <FormControl>
-                    <textarea className="w-full p-2" disabled={isSubmitting} placeholder="e.g Title of the post" {...field}/>
+                    <Textarea disabled={isSubmitting} placeholder="e.g Title of the post" {...field}/>
                   </FormControl>
                   <FormMessage/>
                 </FormItem>
