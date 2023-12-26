@@ -9,8 +9,11 @@ const nextConfig = {
         protocol: "https",
         hostname: 'github.com',
       }
+    ],
+    domains:[
+      'utfs.io'
     ]
-  }
+}
 }
 
 module.exports = nextConfig
