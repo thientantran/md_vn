@@ -1,4 +1,5 @@
 'use client'
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import axios from 'axios'
 import { ImageIcon, Pencil, PlusCircle } from 'lucide-react'
 import Image from 'next/image'
@@ -55,8 +56,19 @@ export default function ImageForm({initialData, postId}) {
               <ImageIcon className='h-7 w-7 text-slate-500'/>
             </div>
           ) : (
-            <div className="relative mt-2 h-5">
-              <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img}/>
+            <div className='cursor-pointer'>
+            <HoverCard>
+              <HoverCardTrigger>
+                <div className="relative mt-2 h-5">
+                  <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img}/>
+                </div>
+              </HoverCardTrigger>
+              <HoverCardContent>
+                <div className="relative mt-2 aspect-video">
+                  <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img}/>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
             </div>
           )
         )
