@@ -1,6 +1,7 @@
 'use client'
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { Pencil } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ import { Form, FormControl, FormField, FormItem } from './ui/form';
 
 
 const formSchema = z.object({
-  description: z.string().min(1)
+  desc: z.string().min(1)
 })
 export default function DetailEditor({initialData, postId}) {
   const [isEditing, setIsEditing] = useState(false)
@@ -23,7 +24,7 @@ export default function DetailEditor({initialData, postId}) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      description: initialData?.description || ""
+      desc: initialData?.desc || ""
     }
   })
 
@@ -33,11 +34,12 @@ export default function DetailEditor({initialData, postId}) {
   const onSubmit = async (values) => {
     // console.log(values)
     try {
-      // await axios.patch(`/api/courses/${courseId}`, values);
-      toast.success("Chapter updated")
+      await axios.patch(`/api/blog/${postId}`, values);
+      toast.success("Post updated")
       toggleEdit()
       router.refresh()
     } catch (error) {
+      console.log(error)
       toast.error("Something went wrong")
     }
   }
@@ -55,11 +57,11 @@ export default function DetailEditor({initialData, postId}) {
         </Button>
       </div>
       {!isEditing && (
-        <div className={cn("text-sm mt-2", !initialData.description && 'text-slate-500 italic')}>
-          {!initialData.description && "Please write the Post"}
-          {initialData.description && (
+        <div className={cn("text-sm mt-2", !initialData.desc && 'text-slate-500 italic')}>
+          {!initialData.desc && "Please write the Post"}
+          {initialData.desc && (
             <Preview
-              value={initialData.description}
+              value={initialData.desc}
             />
           )}
         </div>
@@ -69,7 +71,7 @@ export default function DetailEditor({initialData, postId}) {
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4 mt-4'>
               <FormField
                 control={form.control}
-                name='description'
+                name='desc'
                 render={({field})=> (
                   <FormItem>
                     <FormControl>

@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import { Pencil } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -33,9 +34,9 @@ export default function CategoryForm({initialData, postId, options}) {
   const onSubmit = async (values) => {
     // console.log(values)
     try {
-      // await axios.patch(`/api/posts/${postId}`, values);
-      // toast.success('Post updated');
-      console.log(values)
+      await axios.patch(`/api/blog/${postId}`, values);
+      toast.success('Post updated');
+      // console.log(values)
       toggleEdit();
       router.refresh()
     } catch (error) {

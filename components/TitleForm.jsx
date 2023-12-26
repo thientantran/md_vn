@@ -2,6 +2,7 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -28,13 +29,15 @@ export default function TitleForm({
 
   const router = useRouter()
 
-  const onSubmit = (values) => {
+  const onSubmit =  async (values) => {
     try {
-      console.log(values)
+      // console.log(values)
+      await axios.patch(`/api/blog/${postId}`, values);
       toast.success("OK")
       toggleEdit()
       router.refresh()
     } catch (error) {
+      console.log(error)
       toast.error("Something went wrong")
     }
   }

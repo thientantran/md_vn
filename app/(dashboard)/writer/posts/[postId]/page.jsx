@@ -12,7 +12,7 @@ export default async function page({params}) {
   if(!session){
     return redirect("/")
   }
-  console.log("SESSION: ", session.user.role)
+  // console.log("SESSION: ", session.user.email)
   const post = await prismadb.post.findUnique({
     where: {
       id: params.postId
