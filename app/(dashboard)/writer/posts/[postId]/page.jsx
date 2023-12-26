@@ -1,9 +1,10 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import CategoryForm from '@/components/CategoryForm'
+import DetailEditor from '@/components/DetailEditor'
 import IconBadge from '@/components/IconBadge'
 import TitleForm from '@/components/TitleForm'
 import prismadb from '@/lib/prisma'
-import { LayoutDashboard } from "lucide-react"
+import { BookPlus, LayoutDashboard } from "lucide-react"
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 export default async function page({params}) {
@@ -61,6 +62,15 @@ export default async function page({params}) {
         <div>
           <CategoryForm initialData={post} postId={post.id} options={categories.map((category)=> ({label: category.name, value:category.id }))}/>
         </div>
+      </div>
+      <div className="flex items-center mt-8 gap-x-2">
+        <IconBadge variant='default' icon={BookPlus}/>
+        <h2 className="text-xl">
+          Write your post
+        </h2>
+      </div>
+      <div>
+        <DetailEditor initialData={post} postId={post.id}/>
       </div>
     </div>
   )
