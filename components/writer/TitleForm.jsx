@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 const formSchema = z.object({
   title: z.string().min(1, {
     message: "Title is required"

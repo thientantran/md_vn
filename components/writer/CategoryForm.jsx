@@ -9,9 +9,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as z from 'zod';
-import { Combobox } from './Combobox';
-import { Button } from './ui/button';
-import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form';
+import { Combobox } from '../Combobox';
+import { Button } from '../ui/button';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '../ui/form';
 
 const formSchema = z.object({
   categoryId: z.string().min(1)

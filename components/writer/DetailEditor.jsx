@@ -8,10 +8,10 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import * as z from 'zod';
-import Editor from './Editor';
-import Preview from './Preview';
-import { Button } from './ui/button';
-import { Form, FormControl, FormField, FormItem } from './ui/form';
+import Editor from '../Editor';
+import Preview from '../Preview';
+import { Button } from '../ui/button';
+import { Form, FormControl, FormField, FormItem } from '../ui/form';
 
 
 const formSchema = z.object({
@@ -51,7 +51,7 @@ export default function DetailEditor({initialData, postId}) {
             {isEditing ? (<>Cancel</>) : (
               <>
                 <Pencil className='h-4 w-4 mr-2'/>
-                Edit the Post 
+                Edit the Post
               </>
             )}
         </Button>

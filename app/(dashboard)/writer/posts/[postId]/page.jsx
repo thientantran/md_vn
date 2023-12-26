@@ -1,9 +1,9 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import CategoryForm from '@/components/CategoryForm'
-import DetailEditor from '@/components/DetailEditor'
 import IconBadge from '@/components/IconBadge'
-import ImageForm from '@/components/ImageForm'
-import TitleForm from '@/components/TitleForm'
+import CategoryForm from '@/components/writer/CategoryForm'
+import DetailEditor from '@/components/writer/DetailEditor'
+import ImageForm from '@/components/writer/ImageForm'
+import TitleForm from '@/components/writer/TitleForm'
 import prismadb from '@/lib/prisma'
 import { BookPlus, LayoutDashboard } from "lucide-react"
 import { getServerSession } from 'next-auth'

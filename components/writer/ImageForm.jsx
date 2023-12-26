@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import FileUpload from './FileUpload'
-import { Button } from './ui/button'
+import FileUpload from '../FileUpload'
+import { Button } from '../ui/button'
 
 export default function ImageForm({initialData, postId}) {
   const [isEditing, setIsEditing] = useState(false)
