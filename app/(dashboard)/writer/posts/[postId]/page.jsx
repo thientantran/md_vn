@@ -1,8 +1,10 @@
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import Banner from '@/components/Banner'
 import IconBadge from '@/components/IconBadge'
 import CategoryForm from '@/components/writer/CategoryForm'
 import DetailEditor from '@/components/writer/DetailEditor'
 import ImageForm from '@/components/writer/ImageForm'
+import PostActions from '@/components/writer/PostActions'
 import TitleForm from '@/components/writer/TitleForm'
 import prismadb from '@/lib/prisma'
 import { BookPlus, LayoutDashboard } from "lucide-react"
@@ -38,7 +40,14 @@ export default async function page({params}) {
   const totalFields = requiredFields.length
   const completedFields = requiredFields.filter(Boolean).length
   const completionText = `(${completedFields}/${totalFields})`
+  const isComplete = requiredFields.every(Boolean)
   return (
+    <>
+    {!post.isPublished && (
+      <Banner
+        label="This Post is unpublished. It will not be visible to the users."
+      />
+    )}
     <div className="p-6">
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-y-2">
@@ -49,6 +58,7 @@ export default async function page({params}) {
             Complete all fields {completionText}
           </span>
         </div>
+        <PostActions disabled={!isComplete} postId={params.postId} isPublished={post.isPublished}/>
       </div>
       <div className="flex items-center mt-8 gap-x-2">
         <IconBadge variant='success' icon={LayoutDashboard}/>
@@ -77,5 +87,7 @@ export default async function page({params}) {
         <DetailEditor initialData={post} postId={post.id}/>
       </div>
     </div>
+    </>
+    
   )
 }
