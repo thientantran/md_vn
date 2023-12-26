@@ -1,3 +1,4 @@
+import ConfettiProvider from "@/components/ConfettiProvider";
 import Sidebar from "@/components/Sidebar";
 import ToastProvider from "@/components/ToastProvider";
 import BlogNavbar from "@/components/blog/BlogNavbar";
@@ -13,6 +14,7 @@ export default function layout({children}) {
         <Sidebar/>
       </div>
       <main className='pt-[80px] md:pl-56 h-full'>
+        <ConfettiProvider/>
         <ToastProvider/>
         {children}
       </main>

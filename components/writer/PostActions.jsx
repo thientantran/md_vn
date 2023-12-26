@@ -2,6 +2,7 @@
 
 import ConfirmModal from "@/components/ConfirmModal";
 import { Button } from "@/components/ui/button";
+import { useConfetti } from "@/hooks/useConfetti";
 import axios from "axios";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -27,7 +28,7 @@ export default function PostActions({disabled, postId, isPublished}) {
       setIsLoading(false)
     }
   }
-
+  const confetti = useConfetti();
   const onClick = async () => {
     try {
       setIsLoading(true)
@@ -39,6 +40,7 @@ export default function PostActions({disabled, postId, isPublished}) {
         // console.log("set publish")
         await axios.patch(`/api/blog/${postId}/publish`)
         toast.success("The Post published")
+        confetti.onOpen()
       }
       router.refresh()
     } catch (error) {
