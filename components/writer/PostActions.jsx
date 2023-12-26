@@ -2,6 +2,7 @@
 
 import ConfirmModal from "@/components/ConfirmModal";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -15,11 +16,12 @@ export default function PostActions({disabled, postId, isPublished}) {
     // console.log("Delete")
     try {
       setIsLoading(true)
-      // await axios.delete(`/api/courses/${courseId}`);
+      await axios.delete(`/api/blog/${postId}`);
       toast.success("Post deleted")
       router.refresh()
       router.push(`/writer/posts`)
     } catch (error) {
+      console.log(error)
       toast.error("Something went wrong")
     } finally{
       setIsLoading(false)
@@ -31,12 +33,12 @@ export default function PostActions({disabled, postId, isPublished}) {
       setIsLoading(true)
       if(isPublished){
         // console.log('set unPublish')
-        // await axios.patch(`/api/courses/${courseId}/unpublish`)
-        toast.success("Chapter unpublished")
+        await axios.patch(`/api/blog/${postId}/unpublish`)
+        toast.success("The Post unpublished")
       }else{
         // console.log("set publish")
-        // await axios.patch(`/api/courses/${courseId}/publish`)
-        toast.success("Chapter published")
+        await axios.patch(`/api/blog/${postId}/publish`)
+        toast.success("The Post published")
       }
       router.refresh()
     } catch (error) {
@@ -47,7 +49,7 @@ export default function PostActions({disabled, postId, isPublished}) {
   }
   return (
     <div className="flex items-center gap-x-2">
-      <Button disabled={disabled || isLoading} size='sm' variant='outline' onClick={onClick}>
+      <Button disabled={disabled || isLoading} size='sm' className={isPublished ? 'bg-rose-400' : 'bg-green-400'} variant='outline' onClick={onClick}>
         {isPublished ? "UnPublish" : "Publish"}
       </Button>
       <ConfirmModal onConfirm={onDelete}>

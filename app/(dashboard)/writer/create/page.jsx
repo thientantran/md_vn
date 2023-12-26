@@ -23,7 +23,7 @@ export default function CreatePostPage() {
     try {
       // console.log(values)
       const response = await axios.post("/api/blog", values)
-      router.push(`/posts/${response.data.id}`)
+      router.push(`/writer/posts/${response.data.id}`)
       toast.success("Course created")
     } catch (error) {
       console.log(error)
