@@ -1,14 +1,22 @@
 'use client'
 
-import dynamic from "next/dynamic"
-import { useMemo } from "react"
-import 'react-quill/dist/quill.snow.css'
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
+import 'react-quill/dist/quill.snow.css';
 
 export default function Editor({onChange, value}) {
   const ReactQuill = useMemo(()=> dynamic(()=> import('react-quill'), {ssr:false}),[])
+  // const quillRef = useRef(null);
+  // useEffect(() => {
+  //   if (quillRef.current) {
+  //     const quillInstance = quillRef.current.getEditor();
+  //     quillInstance.format('size', 'large');
+  //   }
+  // }, []);
   return (
     <div className="bg-white">
       <ReactQuill
+      // ref={quillRef}
       theme="snow"
       placeholder="Start writing..."
       modules={{

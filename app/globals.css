@@ -8,7 +8,13 @@ body,
   height: 100%;
 }
 
-
+/**
+ * Styles for the .ql-editor class.
+ * Adjust the font-size value as needed.
+ */
+.ql-editor {
+  font-size: 1.3rem; /* Adjust this value as needed */
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
