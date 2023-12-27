@@ -7,7 +7,7 @@ export default function BlogMenuPost({post}) {
     <div className="px-2 my-2 py-3 bg-white">
         <div className="mt-2 flex items-center gap-x-3">
           <div className="hidden lg:block lg:flex-[1] aspect-square relative">
-            <Image src='https://img.medscapestatic.com/vim/live/professional_assets/medscape/images/thumbnail_library/is_231213_asthma_cough_800x450.jpg' alt="postimage" fill className="rounded-full object-cover"/>
+            <Image src={post.img} alt="postimage" fill className="rounded-full object-cover"/>
           </div>
           <div className="flex-[4]">
             <div className="flex items-center mb-1">
