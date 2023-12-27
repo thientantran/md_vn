@@ -2,8 +2,10 @@ import BlogCategories from "@/components/blog/BlogCategories";
 import BlogFeature from "@/components/blog/BlogFeature";
 import BlogMenu from "@/components/blog/BlogMenu";
 import BlogPostList from "@/components/blog/BlogPostList";
+import { getAllPublishedPosts } from "@/lib/functions";
 
-export default function page() {
+export default async function page() {
+  const posts = await getAllPublishedPosts()
   const categories = ["All", "Cardiology","Diabetes & Endocrinology", "Neruology", "Psychiatry", "Other"]
   return (
    <div className="p-4">
@@ -14,7 +16,7 @@ export default function page() {
     <BlogCategories categories={categories}/>
     <BlogFeature/>
     <div className="flex gap-x-10 mt-[30px]">
-      <BlogPostList/>
+      <BlogPostList posts={posts}/>
       <BlogMenu/>
     </div>
    </div>
