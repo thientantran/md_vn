@@ -6,6 +6,7 @@ import { getAllPublishedPosts } from "@/lib/functions";
 
 export default async function page() {
   const posts = await getAllPublishedPosts()
+  const latestPost = posts[0]
   const categories = ["All", "Cardiology","Diabetes & Endocrinology", "Neruology", "Psychiatry", "Other"]
   return (
    <div className="p-4">
@@ -14,7 +15,7 @@ export default async function page() {
       </h1>
       <hr />
     <BlogCategories categories={categories}/>
-    <BlogFeature/>
+    <BlogFeature latestPost={latestPost}/>
     <div className="flex gap-x-10 mt-[30px]">
       <BlogPostList posts={posts}/>
       <BlogMenu/>
