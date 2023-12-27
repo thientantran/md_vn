@@ -18,7 +18,7 @@ export default async function page() {
     <BlogFeature latestPost={latestPost}/>
     <div className="flex gap-x-10 mt-[30px]">
       <BlogPostList posts={posts}/>
-      <BlogMenu/>
+      <BlogMenu posts={posts}/>
     </div>
    </div>
   )
