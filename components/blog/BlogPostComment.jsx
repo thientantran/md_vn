@@ -32,7 +32,7 @@ export default  function BlogPostComment({post}) {
                 {/* </div> */}
                 {/* <Button>Summit</Button> */}
               {/* </form> */}
-                  {post.comments.map((comment, index) => ( <CommentDetail key={index} comment={comment}/> ))}
+                  {post.comments.map((comment, index) => ( !comment.parentId ? <CommentDetail comments={post.comments} key={index} comment={comment}/> : null))}
             </section>
   )
 }
