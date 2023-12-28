@@ -84,11 +84,14 @@ model Post {
 }
 
 model Comment {
-  id        String   @id @default(cuid()) @map("_id")
-  createdAt DateTime @default(now())
+  id        String    @id @default(cuid()) @map("_id")
+  createdAt DateTime  @default(now())
   desc      String
   userEmail String
-  user      User     @relation(fields: [userEmail], references: [email])
+  user      User      @relation(fields: [userEmail], references: [email])
   postId    String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post      @relation(fields: [postId], references: [id])
+  parentId  String? // New field for the parent comment ID
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction) // New relation field for the parent comment
+  replies   Comment[] @relation("CommentToComment") // New relation field for the replies
 }
