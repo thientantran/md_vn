@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation'
 
 export default function UserMenu() {
   const {data} = useSession()
-  console.log('CLIENT SESSION: ',data)
   const router = useRouter()
   if(!data){
     return (

@@ -1,4 +1,5 @@
 import SessionProvider from "@/components/SessionProvider";
+import TanstackProvider from "@/components/TanstackProvider";
 import { getServerSession } from 'next-auth';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -15,9 +16,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
-            {children}
-        </SessionProvider>
+          <SessionProvider session={session}>
+            <TanstackProvider>
+              {children}
+            </TanstackProvider>
+          </SessionProvider>
       </body>
     </html>
   )
