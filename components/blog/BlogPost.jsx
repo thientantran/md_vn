@@ -17,7 +17,7 @@ export default function BlogPost({post}) {
             <Image src={post.img} alt="postimage" fill className="rounded-md object-cover"/>
           </div>
           <div className="sm:flex-[5]  md:flex-[5] lg:flex-[4]">
-            <Link className="text-base md:text-xl font-semibold text-gray-700 hover:text-gray-600" href="/blog">{post.title}</Link>
+            <Link className="text-base md:text-xl font-semibold text-gray-700 hover:text-gray-600" href={`/news/${post.id}`}>{post.title}</Link>
             <p className="mt-2 text-xs md:text-sm text-gray-600 line-clamp-3">{textContent}</p>
           </div>
         </div>

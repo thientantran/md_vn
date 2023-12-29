@@ -52,7 +52,7 @@ export default function AComment({comment}) {
 
   return (
     <div>
-        <div className="flex justify-between items-center mb-1">
+        <div className="flex justify-between items-center">
           <div className="flex items-center">
             <div className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
               <div className="h-6 w-6 relative mr-2">
@@ -80,7 +80,7 @@ export default function AComment({comment}) {
           </DropdownMenu>
         </div>
         {!isEditing && (
-          <p className="px-8">
+          <p className="px-8 mb-1">
             {comment.desc}
           </p>
         )}

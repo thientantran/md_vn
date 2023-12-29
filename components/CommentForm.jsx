@@ -66,7 +66,7 @@ export default function CommentForm({ postId,parentId=null, isReply=false, setIs
             />
             <div className="flex items-center gap-x-2">
               {isReply && (
-                <Button onClick={setIsReplying}>
+                <Button onClick={()=>setIsReplying(false)}>
                   Cancel
                 </Button>
               )}

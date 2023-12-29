@@ -60,8 +60,8 @@ export default function CommentDetail({comment,comments}) {
   const childComments = comments.filter((c) => c.parentId === comment.id)
 
   return (
-    <div className="px-6 py-2 text-base bg-white rounded-lg dark:bg-gray-900">
-      <div className="flex justify-between items-center mb-1">
+    <div className="px-6 py-2 text-base bg-white rounded-lg dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <div className="flex justify-between items-center">
         <div className="flex items-center">
           <div className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
             <div className="h-6 w-6 relative mr-2">
@@ -89,7 +89,7 @@ export default function CommentDetail({comment,comments}) {
         </DropdownMenu>
       </div>
       {!isEditing && (
-        <p className="px-8">
+        <p className="px-8 mb-1">
           {comment.desc}
         </p>
       )}
