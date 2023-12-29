@@ -9,6 +9,7 @@ export default function BlogCategoryItem({category}) {
   const searchParams = useSearchParams()
 
   const currentCategoryId = searchParams.get("categoryId")
+  const currentTitle = searchParams.get("title")
   const isSelected = currentCategoryId == category.id || currentCategoryId === null && category.name === "All"
 
   const onClick = () => {
@@ -19,6 +20,7 @@ export default function BlogCategoryItem({category}) {
     const url = qs.stringifyUrl({
       url: pathname,
       query: {
+        title: currentTitle,
         categoryId: newCategoryId
       },
     } , {skipNull: true, skipEmptyString: true})
