@@ -2,12 +2,12 @@ import BlogCategories from "@/components/blog/BlogCategories";
 import BlogFeature from "@/components/blog/BlogFeature";
 import BlogMenu from "@/components/blog/BlogMenu";
 import BlogPostList from "@/components/blog/BlogPostList";
-import { getAllPublishedPosts } from "@/lib/functions";
+import { getAllCategories, getAllPublishedPosts } from "@/lib/functions";
 
 export default async function page() {
   const posts = await getAllPublishedPosts()
   const latestPost = posts[0]
-  const categories = ["All", "Cardiology","Diabetes & Endocrinology", "Neruology", "Psychiatry", "Other"]
+  const categories = await getAllCategories()
   return (
    <div className="p-4">
     <h1 className='mb-[30px] text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light'>
