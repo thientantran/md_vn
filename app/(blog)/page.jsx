@@ -18,11 +18,11 @@ export default async function page({searchParams}) {
       <b>Hey, MedscapeVN here!</b> Read News about medicine and pharmacy.
     </h1>
     <hr/>
-    <BlogCategories categories={categories}/>
     <BlogFeature latestPost={latestPost}/>
     <div className="mt-6 w-full flex items-center justify-center">
       <BlogSearchInput/>
     </div>
+    <BlogCategories categories={categories}/>
     <div className="flex gap-x-10 mt-6">
       <BlogPostList posts={posts}/>
       <BlogMenu posts={allPosts}/>
