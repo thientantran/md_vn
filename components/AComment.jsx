@@ -4,10 +4,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { MoreHorizontal, Pencil, Trash } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -26,29 +26,88 @@ export default function AComment({comment}) {
     defaultValues: comment
   })
   const { isSubmitting, isValid } = form.formState;
-  const router = useRouter()
-  const onSubmit =  async (values) => {
-    try {
-      // console.log(values)
-      await axios.patch(`/api/blog/${comment.postId}/comments/${comment.id}`, values);
-      toast.success("OK")
-      toggleEdit()
-      router.refresh()
-    } catch (error) {
-      console.log(error)
-      toast.error("Something went wrong")
+  const queryClient = useQueryClient()
+  const editMutation = useMutation({
+    mutationFn: (body) =>{
+      return axios.patch(`/api/blog/${comment.postId}/comments/${comment.id}`, body)
     }
-  }
-  const onDelete = async () => {
-    try {
-      await axios.delete(`/api/blog/${comment.postId}/comments/${comment.id}`);
-      toast.success("OK")
-      router.refresh()
-    } catch (error) {
-      console.log(error)
-      toast.error("Something went wrong")
+  })
+  const deleteMutation = useMutation({
+    mutationFn: () =>{
+      // console.log(`/api/blog/${postId}/comments/${values.id}`)
+      return axios.delete(`/api/blog/${comment.postId}/comments/${comment.id}`)
     }
+  })
+
+  const onSubmit = (values) => {
+    queryClient.setQueryData(["post", comment.postId], (oldData) => {
+      const updatedComments = oldData.comments.map((c) => {
+        if (c.id === comment.id) {
+          // return {...c,...data.data}
+          c.desc = values.desc
+          return {...c}
+        }
+        return c;
+      });
+
+      return {
+        ...oldData,
+        comments: updatedComments,
+      };
+    });
+    toggleEdit();
+    editMutation.mutate(values, {
+      onSuccess: (data) => {
+        toast.success("OK");
+        // toggleEdit();
+        // // Update the query data
+        // // chú ý: data trả về chỉ có post, ko có chứa user, trong khi data trong querydata để biding ra là user, hình,
+        // queryClient.setQueryData(["post", comment.postId], (oldData) => {
+        //   const updatedComments = oldData.comments.map((c) => {
+        //     if (c.id === comment.id) {
+        //       // return {...c,...data.data}
+        //       c.desc = values.desc
+        //       return {...c}
+        //     }
+        //     return c;
+        //   });
+        //   return {
+        //     ...oldData,
+        //     comments: updatedComments,
+        //   };
+        // });
+        queryClient.invalidateQueries(["post", comment.postId]);
+      },
+      onError: (error) => {
+        console.log(error);
+        queryClient.invalidateQueries(["post", comment.postId]);
+        toast.error(error.response.data);
+      }
+    });
+  };
+  const onDelete = () => {
+    queryClient.setQueryData(["post", comment.postId], oldData => {
+      // Remove the deleted comment from the comments array
+      return {
+        ...oldData,
+        comments: oldData.comments.filter(c => c.id !== comment.id)
+      };
+    });
+    deleteMutation.mutate(null,   {
+      onSuccess: () => {
+        toast.success("OK");
+        // console.log(data)
+      //   // Update the cache
+      // Invalidate the query
+      queryClient.invalidateQueries(["post", comment.postId]);
+      },
+      onError: (error) => {
+        queryClient.invalidateQueries(["post", comment.postId]);
+        toast.error(error.response.data);
+      },
+    });
   }
+
 
   return (
     <div>

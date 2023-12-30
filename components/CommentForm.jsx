@@ -4,6 +4,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,29 +18,45 @@ const formSchema = z.object({
 })
 
 export default function CommentForm({ postId,parentId=null, isReply=false, setIsReplying= null}) {
-  const [comment, setComment] = useState('')
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues:comment
+    defaultValues:{desc: ""}
   })
   const { isSubmitting, isValid } = form.formState;
-
+  const queryClient = useQueryClient()
   const router = useRouter()
 
-  const onSubmit =  async (values) => {
-    try {
-      console.log(values)
-      await axios.post(`/api/blog/${postId}/comments`, {...values, parentId});
-      toast.success("OK")
-      router.refresh()
-    } catch (error) {
-      console.log(error)
-      toast.error("Something went wrong")
-    }finally{
-      {isReply && setIsReplying(false)}
-      form.reset()
+  const commentMutation = useMutation({
+    mutationFn: (body) =>{
+      return axios.post(`/api/blog/${postId}/comments`, body)
     }
-  }
+  })
+
+  const onSubmit = (values) => {
+    commentMutation.mutate({ ...values, parentId }, {
+      onSuccess: (data) => {
+        toast.success("OK");
+        // queryClient.setQueryData(["post", postId], (oldData) => {
+        //   return {
+        //     ...oldData,
+        //     comments: [...oldData.comments, data.data]
+        //   }
+        // })
+        queryClient.invalidateQueries(["post", postId])
+        // router.refresh()
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message);
+      },
+      onSettled: () => {
+        form.reset(); // Reset the form
+        if (isReply) {
+          setIsReplying(false);
+        }
+      }
+    });
+  };
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

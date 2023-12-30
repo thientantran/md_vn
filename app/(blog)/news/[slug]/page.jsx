@@ -21,8 +21,7 @@ export default async function page({params}) {
               <div>
                 <Link href="/auth" className="text-sky-700">Đăng nhập </Link> để đọc bình luận
               </div>
-            ) : (<BlogPostComment post={post}/>)}
-            
+            ) : (<BlogPostComment postId={postId}/>)}
           </article>
         </div>
       </div>

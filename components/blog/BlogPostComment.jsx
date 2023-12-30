@@ -1,12 +1,21 @@
 'use client'
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import CommentDetail from '../CommentDetail';
 import CommentForm from '../CommentForm';
 
-export default  function BlogPostComment({post}) {
+export default  function BlogPostComment({postId}) {
   const session = useSession()
   const [isClient, setIsClient] = useState(false);
+  const {data:post, isLoading, isError} = useQuery({
+    queryKey: ['post', postId],
+    queryFn: async () => {
+      const {data} = await axios.get(`/api/blog/${postId}`)
+      return data
+    },
+  })
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -20,6 +29,14 @@ export default  function BlogPostComment({post}) {
       </div>
     )
   }
+  if(isLoading){
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+
   return (
     <section className="mt-4">
               <div className="flex justify-between items-center mb-6">

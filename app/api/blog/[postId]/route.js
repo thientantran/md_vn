@@ -3,6 +3,33 @@ import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 import { authOptions } from "../../auth/[...nextauth]/route"
 
+export async function GET(req,{params}) {
+  try {
+    const session = await getServerSession(authOptions)
+    if(!session){
+      return new NextResponse("Unauthorized", {status:401})
+    }
+    const post = await prismadb.post.findUnique({
+      where: {
+        id: params.postId
+      },
+      include: {
+        category: true,
+        user: true,
+        comments: {
+          include: {
+            user: true
+          }
+        }
+      }
+    });
+    return NextResponse.json(post)
+  } catch (error) {
+    console.log(["GET_POSTS", error])
+    return new NextResponse("Internal Error", {status:500})
+  }
+}
+
 export async function DELETE(
   req,
   {params}
