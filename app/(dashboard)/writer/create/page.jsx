@@ -19,12 +19,11 @@ export default function CreatePostPage() {
     }
   })
   const onSubmit = async (values) => {
-    
     try {
       // console.log(values)
       const response = await axios.post("/api/blog", values)
       router.push(`/writer/posts/${response.data.id}`)
-      toast.success("Course created")
+      toast.success("Post created")
     } catch (error) {
       console.log(error)
     }

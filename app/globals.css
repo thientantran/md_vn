@@ -13,7 +13,7 @@ body,
  * Adjust the font-size value as needed.
  */
 .ql-editor {
-  font-size: 1.3rem; /* Adjust this value as needed */
+  font-size: 1rem;
 }
 @layer base {
   :root {
