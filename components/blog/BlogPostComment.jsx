@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
-import CommentDetail from '../CommentDetail';
+import Comment from '../Comment';
 import CommentForm from '../CommentForm';
 
 export default  function BlogPostComment({postId}) {
@@ -49,7 +49,27 @@ export default  function BlogPostComment({postId}) {
                 {/* </div> */}
                 {/* <Button>Summit</Button> */}
               {/* </form> */}
-                  {post.comments.map((comment, index) => ( !comment.parentId ? <CommentDetail comments={post.comments} key={index} comment={comment}/> : null))}
+                  {/* {post.comments.map((comment, index) => ( !comment.parentId ? <CommentDetail comments={post.comments} key={index} comment={comment}/> : null))} */}
+                  {/* {post.comments.map((comment, index) => ( <Comment key={index} comment={comment}/> ))} */}
+                  {post.comments.map((comment) => {
+                    if(!comment.parentId){
+                      const childComments = post.comments.filter((c) => c.parentId === comment.id)
+                      return (
+                        <div key={comment.id} className="ml-2">
+                          <Comment comment={comment}/>
+                           {childComments.length !== 0 && (
+                            <div className="ml-6">
+                              {childComments.map((childComment) => (
+                                <Comment key={childComment.id} comment={childComment}/>
+                                // <AComment key={childComment.id} comment={childComment}/>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    }
+
+                  })}
             </section>
   )
 }
