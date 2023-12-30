@@ -102,7 +102,6 @@ export default function Comment({comment}) {
     try {
       await deleteMutation.mutateAsync(null)
       toast.success("OK");
-      console.log('delete OK')
     } catch (error) {
       console.log(error);
       toast.error(error.response.data);

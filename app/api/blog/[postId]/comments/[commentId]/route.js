@@ -23,7 +23,7 @@ export async function PATCH(req, { params }) {
 
     return NextResponse.json(comment);
   } catch (error) {
-    console.log(["CREATE_COMMENT", error]);
+    console.log(["UPDATE_COMMENT", error]);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
@@ -46,6 +46,12 @@ export async function DELETE(
       return new NextResponse("Not found", {status:404})
     }
 
+    // Delete child comments with parentId equal to commentId
+    await prismadb.comment.deleteMany({
+      where: {
+        parentId: params.commentId
+      }
+    })
     const deletedComment = await prismadb.comment.delete({
       where: {
         id: params.commentId
