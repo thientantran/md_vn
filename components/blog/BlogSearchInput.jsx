@@ -15,24 +15,23 @@ export default function BlogSearchInput() {
   const pathname = usePathname()
 
   const currentCategoryId = searchParams.get("categoryId");
-  const currentPage = searchParams.get("page")
 
-  useEffect(()=> {
+  useEffect(() => {
     const url = qs.stringifyUrl({
       url: pathname,
       query: {
         categoryId: currentCategoryId,
         title: debouncedValue,
-        page: currentPage || 1,
+        page: 1,
       }
-    }, {skipEmptyString: true, skipNull: true})
+    }, { skipEmptyString: true, skipNull: true })
     router.push(url)
-  }, [debouncedValue, currentCategoryId, router, pathname,currentPage])
+  }, [debouncedValue, currentCategoryId, router, pathname])
   return (
     <div className="flex w-full justify-center">
       <div className="relative w-full md:w-[50%] mx-auto">
-        <Search className="h-4 w-4 absolute top-3 left-3 text-slate-600"/>
-        <Input onChange={(e) => setValue(e.target.value)} value={value} placeholder="Type the news that you want to find..." className="w-full pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200"/>
+        <Search className="h-4 w-4 absolute top-3 left-3 text-slate-600" />
+        <Input onChange={(e) => setValue(e.target.value)} value={value} placeholder="Type the news that you want to find..." className="w-full pl-9 rounded-full bg-slate-100 focus-visible:ring-slate-200" />
       </div>
     </div>
   )

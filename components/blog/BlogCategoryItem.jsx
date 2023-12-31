@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import qs from "query-string"
 
-export default function BlogCategoryItem({category}) {
+export default function BlogCategoryItem({ category }) {
   const pathname = usePathname()
   const router = useRouter()
   const searchParams = useSearchParams()
 
   const currentCategoryId = searchParams.get("categoryId")
-  const currentPage = searchParams.get("page")
+
   const currentTitle = searchParams.get("title")
   const isSelected = currentCategoryId == category.id || currentCategoryId === null && category.name === "All"
 
@@ -23,9 +23,9 @@ export default function BlogCategoryItem({category}) {
       query: {
         title: currentTitle,
         categoryId: newCategoryId,
-        page: currentPage || 1,
+        page: 1,
       },
-    } , {skipNull: true, skipEmptyString: true})
+    }, { skipNull: true, skipEmptyString: true })
     router.push(url)
   }
   return (

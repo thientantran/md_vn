@@ -6,7 +6,7 @@ import {
   PaginationItem,
   PaginationLink,
   PaginationNext,
-  PaginationPrevious,
+  PaginationPrevious
 } from "@/components/ui/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
@@ -23,7 +23,7 @@ export function BlogPagination({ pageSize }) {
 
   const currentCategoryId = searchParams.get("categoryId")
   const currentTitle = searchParams.get("title")
-    
+  const currentPage = Number(searchParams.get("page"))
   useEffect(() => {
     setIsMounted(true)
   }, [])
@@ -84,7 +84,8 @@ export function BlogPagination({ pageSize }) {
         );
       });
   };
-  const handleClick = (pageNumber) => {setPage(pageNumber);
+  const handleClick = (pageNumber) => {
+    setPage(pageNumber);
     const url = qs.stringifyUrl({
       url: pathname,
       query: {
@@ -92,19 +93,34 @@ export function BlogPagination({ pageSize }) {
         categoryId: currentCategoryId,
         page: pageNumber
       },
-    } , {skipNull: true, skipEmptyString: true})
+    }, { skipNull: true, skipEmptyString: true })
     router.push(url)
   }
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious/>
-        </PaginationItem>
+        {
+          currentPage === 1 ? (
+            <PaginationItem>
+              <PaginationPrevious disabled />
+            </PaginationItem>) : (
+            <PaginationItem onClick={() => handleClick(currentPage - 1)}>
+              <PaginationPrevious className='cursor-pointer' />
+            </PaginationItem>
+          )
+        }
+
         {renderPagination()}
-        <PaginationItem>
-          <PaginationNext href="#" />
-        </PaginationItem>
+        {
+          currentPage === pageSize ? (
+            <PaginationItem>
+              <PaginationNext disabled />
+            </PaginationItem>) : (
+            <PaginationItem onClick={() => handleClick(currentPage + 1)}>
+              <PaginationNext className='cursor-pointer' />
+            </PaginationItem>
+          )
+        }
       </PaginationContent>
     </Pagination>
   )
