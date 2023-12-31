@@ -1,7 +1,7 @@
-import { Button } from "../ui/button";
+import { BlogPagination } from "./BlogPagination";
 import BlogPost from "./BlogPost";
 
-export default function BlogPostList({posts}) {
+export default function BlogPostList({posts,pageSize}) {
   return (
     <div className="md:flex-[5]">
       <div className="text-xl md:text-2xl font-semibold">
@@ -11,9 +11,8 @@ export default function BlogPostList({posts}) {
         <BlogPost key={post.id} post={post}/>
       ))
       }
-      <div className="mt-6 flex justify-end ml-auto gap-x-3">
-          <Button variant='outline'>Previous</Button>
-          <Button variant='outline'>Next</Button>
+      <div className="mt-6 flex justify-center ml-auto gap-x-3">
+          <BlogPagination pageSize={2}/>
       </div>
     </div>
   )

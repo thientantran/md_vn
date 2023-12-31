@@ -9,6 +9,7 @@ export default function BlogCategoryItem({category}) {
   const searchParams = useSearchParams()
 
   const currentCategoryId = searchParams.get("categoryId")
+  const currentPage = searchParams.get("page")
   const currentTitle = searchParams.get("title")
   const isSelected = currentCategoryId == category.id || currentCategoryId === null && category.name === "All"
 
@@ -21,7 +22,8 @@ export default function BlogCategoryItem({category}) {
       url: pathname,
       query: {
         title: currentTitle,
-        categoryId: newCategoryId
+        categoryId: newCategoryId,
+        page: currentPage || 1,
       },
     } , {skipNull: true, skipEmptyString: true})
     router.push(url)

@@ -11,7 +11,6 @@ export default async function page({searchParams}) {
   const latestPost = allPosts[0]
   const categories = await getAllCategories()
 
-
   return (
    <div className="p-4">
     <h1 className='mb-[30px] text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light'>
@@ -28,5 +27,5 @@ export default async function page({searchParams}) {
       <BlogMenu posts={allPosts}/>
     </div>
    </div>
-  )
+  );
 }

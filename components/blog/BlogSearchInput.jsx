@@ -15,17 +15,19 @@ export default function BlogSearchInput() {
   const pathname = usePathname()
 
   const currentCategoryId = searchParams.get("categoryId");
+  const currentPage = searchParams.get("page")
 
   useEffect(()=> {
     const url = qs.stringifyUrl({
       url: pathname,
       query: {
         categoryId: currentCategoryId,
-        title: debouncedValue
+        title: debouncedValue,
+        page: currentPage || 1,
       }
     }, {skipEmptyString: true, skipNull: true})
     router.push(url)
-  }, [debouncedValue, currentCategoryId, router, pathname])
+  }, [debouncedValue, currentCategoryId, router, pathname,currentPage])
   return (
     <div className="flex w-full justify-center">
       <div className="relative w-full md:w-[50%] mx-auto">
