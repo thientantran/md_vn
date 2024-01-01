@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const queryClient = new QueryClient()
-export default function TanstackProvider({children}) {
+export default function TanstackProvider({ children }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />

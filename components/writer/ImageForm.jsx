@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 import FileUpload from '../FileUpload'
 import { Button } from '../ui/button'
 
-export default function ImageForm({initialData, postId}) {
+export default function ImageForm({ initialData, postId }) {
   const [isEditing, setIsEditing] = useState(false)
   const toggleEdit = () => setIsEditing((current) => !current)
 
@@ -37,13 +37,13 @@ export default function ImageForm({initialData, postId}) {
           )}
           {!isEditing && !initialData.img && (
             <>
-              <PlusCircle className='h-4 w-4 mr-2'/>
+              <PlusCircle className='h-4 w-4 mr-2' />
               Add an image
             </>
           )}
           {!isEditing && initialData.img && (
             <>
-              <Pencil className='h-4 w-4 mr-2'/>
+              <Pencil className='h-4 w-4 mr-2' />
               Edit image
             </>
           )}
@@ -53,22 +53,22 @@ export default function ImageForm({initialData, postId}) {
         !isEditing && (
           !initialData.img ? (
             <div className="flex items-center justify-center h-full bg-slate-100 rounded-sm">
-              <ImageIcon className='h-7 w-7 text-slate-500'/>
+              <ImageIcon className='h-7 w-7 text-slate-500' />
             </div>
           ) : (
             <div className='cursor-pointer'>
-            <HoverCard>
-              <HoverCardTrigger>
-                <div className="relative mt-2 h-5">
-                  <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img}/>
-                </div>
-              </HoverCardTrigger>
-              <HoverCardContent>
-                <div className="relative mt-2 aspect-video">
-                  <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img}/>
-                </div>
-              </HoverCardContent>
-            </HoverCard>
+              <HoverCard>
+                <HoverCardTrigger>
+                  <div className="relative mt-2 h-5">
+                    <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img} />
+                  </div>
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <div className="relative mt-2 aspect-video">
+                    <Image alt='upload' fill className='object-cover rounded-sm' src={initialData.img} />
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             </div>
           )
         )
@@ -78,8 +78,8 @@ export default function ImageForm({initialData, postId}) {
           <FileUpload
             endpoint='courseImage'
             onChange={(url) => {
-              if(url) {
-                onSubmit({img: url})
+              if (url) {
+                onSubmit({ img: url })
               }
             }}
           />

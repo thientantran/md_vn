@@ -4,7 +4,7 @@ import ReactConfetti from 'react-confetti';
 
 export default function ConfettiProvider() {
   const confetti = useConfetti()
-  if(!confetti.isOpen) return null;
+  if (!confetti.isOpen) return null;
   return (
     <ReactConfetti
       className='pointer-events-none z-[100]'

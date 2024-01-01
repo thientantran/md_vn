@@ -29,12 +29,12 @@ export async function PATCH(req, { params }) {
 }
 export async function DELETE(
   req,
-  {params}
-){
+  { params }
+) {
   try {
     const session = await getServerSession(authOptions)
-    if(!session) {
-      return new NextResponse("Unauthorized", {status:401})
+    if (!session) {
+      return new NextResponse("Unauthorized", { status: 401 })
     }
     const comment = await prismadb.comment.findUnique({
       where: {
@@ -42,8 +42,8 @@ export async function DELETE(
         userEmail: session.user?.email
       },
     })
-    if(!comment){
-      return new NextResponse("Not found", {status:404})
+    if (!comment) {
+      return new NextResponse("Not found", { status: 404 })
     }
 
     // Delete child comments with parentId equal to commentId
@@ -61,6 +61,6 @@ export async function DELETE(
     return NextResponse.json(deletedComment)
   } catch (error) {
     console.log("[COMMENT_ID_DELETE]", error)
-    return new NextResponse("Internal Error", {status: 500})
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

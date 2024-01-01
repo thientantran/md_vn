@@ -7,16 +7,16 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(
   req,
-  {params}
-){
+  { params }
+) {
   try {
     const session = await getServerSession(authOptions)
-    if(!session){
-      return new NextResponse("Unauthorized", {status:401})
+    if (!session) {
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     const post = await prismadb.post.update({
-      where:{
+      where: {
         id: params.postId,
         userEmail: session.user?.email
       },
@@ -25,13 +25,13 @@ export async function PATCH(
       }
     })
 
-    if(!post) {
-      return new NextResponse("Unauthorized", {status:401 })
+    if (!post) {
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     return NextResponse.json(post)
   } catch (error) {
     console.log("[POST_UNPUBLISH]", error)
-    return new NextResponse("Internal Error", {status:500})
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

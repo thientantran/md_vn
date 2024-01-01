@@ -3,7 +3,7 @@
 import { AlertDialogCancel } from "@radix-ui/react-alert-dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
 
-export default function ConfirmModal({children, onConfirm}) {
+export default function ConfirmModal({ children, onConfirm }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

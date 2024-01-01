@@ -28,7 +28,7 @@ export default function CreatePostPage() {
       console.log(error)
     }
   }
-  const {isSubmitting, isValid} = form.formState
+  const { isSubmitting, isValid } = form.formState
   return (
     <div className="max-w-5xl mx-auto flex h-full p-6 md:items-center md:justify-center">
       <div>
@@ -44,23 +44,23 @@ export default function CreatePostPage() {
             <FormField
               control={form.control}
               name='title'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>
                     Post title
                   </FormLabel>
                   <FormControl>
-                    <Input disabled={isSubmitting} placeholder="Title of the post" {...field}/>
+                    <Input disabled={isSubmitting} placeholder="Title of the post" {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <div className='flex items-center gap-x-2'>
               <Link href='/'>
-                  <Button variant='ghost' type='button'>
-                    Cancel
-                  </Button>
+                <Button variant='ghost' type='button'>
+                  Cancel
+                </Button>
               </Link>
               <Button type='submit' disabled={!isValid || isSubmitting}>
                 Continue

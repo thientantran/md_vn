@@ -22,12 +22,12 @@ const iconMap = {
   success: CheckCircleIcon
 }
 
-export default function Banner({label, variant}) {
+export default function Banner({ label, variant }) {
   const Icon = iconMap[variant || 'warning']
   return (
-      <div className={cn(bannerVariants({variant}))}>
-        <Icon className="h-4 w-4 mr-2"/>
-        {label}
-      </div>
+    <div className={cn(bannerVariants({ variant }))}>
+      <Icon className="h-4 w-4 mr-2" />
+      {label}
+    </div>
   )
 }

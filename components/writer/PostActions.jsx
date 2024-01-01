@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function PostActions({disabled, postId, isPublished}) {
+export default function PostActions({ disabled, postId, isPublished }) {
   const [isLoading, setIsLoading] = useState(false)
 
   const router = useRouter()
@@ -19,12 +19,12 @@ export default function PostActions({disabled, postId, isPublished}) {
       setIsLoading(true)
       await axios.delete(`/api/blog/${postId}`);
       toast.success("Post deleted")
-      router.refresh()
       router.push(`/writer/posts`)
+      router.refresh()
     } catch (error) {
       console.log(error)
       toast.error("Something went wrong")
-    } finally{
+    } finally {
       setIsLoading(false)
     }
   }
@@ -32,11 +32,11 @@ export default function PostActions({disabled, postId, isPublished}) {
   const onClick = async () => {
     try {
       setIsLoading(true)
-      if(isPublished){
+      if (isPublished) {
         // console.log('set unPublish')
         await axios.patch(`/api/blog/${postId}/unpublish`)
         toast.success("The Post unpublished")
-      }else{
+      } else {
         // console.log("set publish")
         await axios.patch(`/api/blog/${postId}/publish`)
         toast.success("The Post published")
@@ -45,7 +45,7 @@ export default function PostActions({disabled, postId, isPublished}) {
       router.refresh()
     } catch (error) {
       toast.error("Something went wrong")
-    }finally{
+    } finally {
       setIsLoading(false)
     }
   }
@@ -56,7 +56,7 @@ export default function PostActions({disabled, postId, isPublished}) {
       </Button>
       <ConfirmModal onConfirm={onDelete}>
         <Button size='sm' disabled={isLoading}>
-          <Trash className="h-4 w-4"/>
+          <Trash className="h-4 w-4" />
         </Button>
       </ConfirmModal>
     </div>

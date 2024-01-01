@@ -6,30 +6,30 @@ import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 export default function UserMenu() {
-  const {data} = useSession()
+  const { data } = useSession()
   const router = useRouter()
-  if(!data){
+  if (!data) {
     return (
-      <Button onClick={()=>(router.push("/auth"))}  variant='outline'>
+      <Button onClick={() => (router.push("/auth"))} variant='outline'>
         Login
       </Button>
     )
   }
   return (
     <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Avatar>
-            <AvatarImage src={ data.user?.image || "https://github.com/shadcn.png"} alt="@shadcn" />
-            <AvatarFallback>MD</AvatarFallback>
-          </Avatar>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>{data.user?.name}</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className='cursor-pointer'>Profile</DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer'>{data.user?.role}</DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer' onClick={()=>signOut()}>Logout</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <DropdownMenuTrigger>
+        <Avatar>
+          <AvatarImage src={data.user?.image || "https://github.com/shadcn.png"} alt="@shadcn" />
+          <AvatarFallback>MD</AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuLabel>{data.user?.name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className='cursor-pointer'>Profile</DropdownMenuItem>
+        <DropdownMenuItem className='cursor-pointer'>{data.user?.role}</DropdownMenuItem>
+        <DropdownMenuItem className='cursor-pointer' onClick={() => signOut()}>Logout</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

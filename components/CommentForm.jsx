@@ -17,17 +17,17 @@ const formSchema = z.object({
   })
 })
 
-export default function CommentForm({ postId,parentId=null, isReply=false, setIsReplying= null}) {
-  const {data: user} = useSession()
+export default function CommentForm({ postId, parentId = null, isReply = false, setIsReplying = null }) {
+  const { data: user } = useSession()
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues:{desc: ""}
+    defaultValues: { desc: "" }
   })
   const { isSubmitting, isValid } = form.formState;
   const queryClient = useQueryClient()
 
   const commentMutation = useMutation({
-    mutationFn: (body) =>{
+    mutationFn: (body) => {
       return axios.post(`/api/blog/${postId}/comments`, body)
     }
   })
@@ -61,7 +61,7 @@ export default function CommentForm({ postId,parentId=null, isReply=false, setIs
     } catch (error) {
       console.log('error');
       toast.error(error.response.data.message);
-    }finally{
+    } finally {
       form.reset();
       queryClient.invalidateQueries(["post", postId]);
     }
@@ -77,32 +77,32 @@ export default function CommentForm({ postId,parentId=null, isReply=false, setIs
   }
   return (
     <div>
-        <Form {...form}>
-          <form className="space-y-2 mb-1"  onSubmit={(form.handleSubmit(onSubmit))}>
-            <FormField
-              control={form.control}
-              name="desc"
-              render={({field})=>(
-                <FormItem>
-                  <FormControl>
-                    <Textarea className={cn(isReply && "min-h-[40px]")} disabled={isSubmitting} placeholder="Write your comment" {...field} rows={1}/>
-                  </FormControl>
-                  <FormMessage/>
-                </FormItem>
-              )}
-            />
-            <div className="flex items-center gap-x-2">
-              {isReply && (
-                <Button onClick={()=>setIsReplying(false)}>
-                  Cancel
-                </Button>
-              )}
-              <Button type="submit" disabled={!isValid || isSubmitting}>
-                {isReply ? 'Trả lời' : "Bình luận"}
+      <Form {...form}>
+        <form className="space-y-2 mb-1" onSubmit={(form.handleSubmit(onSubmit))}>
+          <FormField
+            control={form.control}
+            name="desc"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Textarea className={cn(isReply && "min-h-[40px]")} disabled={isSubmitting} placeholder="Write your comment" {...field} rows={1} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex items-center gap-x-2">
+            {isReply && (
+              <Button onClick={() => setIsReplying(false)}>
+                Cancel
               </Button>
-            </div>
-          </form>
-        </Form>
+            )}
+            <Button type="submit" disabled={!isValid || isSubmitting}>
+              {isReply ? 'Trả lời' : "Bình luận"}
+            </Button>
+          </div>
+        </form>
+      </Form>
     </div>
   )
 }

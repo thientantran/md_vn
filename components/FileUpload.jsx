@@ -6,11 +6,11 @@ import toast from "react-hot-toast"
 
 
 
-export default function FileUpload({onChange, endpoint}) {
+export default function FileUpload({ onChange, endpoint }) {
   return (
     <UploadDropzone
       endpoint={endpoint}
-      onClientUploadComplete={(res)=>{
+      onClientUploadComplete={(res) => {
         onChange(res?.[0].url)
       }}
       onUploadError={(error) => {

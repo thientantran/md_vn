@@ -29,7 +29,7 @@ export default function TitleForm({
 
   const router = useRouter()
 
-  const onSubmit =  async (values) => {
+  const onSubmit = async (values) => {
     try {
       // console.log(values)
       await axios.patch(`/api/blog/${postId}`, values);
@@ -50,7 +50,7 @@ export default function TitleForm({
             <>Cancel</>
           ) : (
             <>
-              <Pencil className="h-4 w-4 mr-2"/>
+              <Pencil className="h-4 w-4 mr-2" />
               Edit title
             </>
           )}
@@ -67,12 +67,12 @@ export default function TitleForm({
             <FormField
               control={form.control}
               name="title"
-              render={({field})=>(
+              render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea disabled={isSubmitting} placeholder="e.g Title of the post" {...field}/>
+                    <Textarea disabled={isSubmitting} placeholder="e.g Title of the post" {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

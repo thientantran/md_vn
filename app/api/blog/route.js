@@ -7,8 +7,8 @@ export async function POST(req) {
   try {
     const session = await getServerSession(authOptions)
     const body = await req.json()
-    if(!session){
-      return new NextResponse("Unauthorized", {status:401})
+    if (!session) {
+      return new NextResponse("Unauthorized", { status: 401 })
     }
 
     const post = await prismadb.post.create({
@@ -20,6 +20,6 @@ export async function POST(req) {
     return NextResponse.json(post)
   } catch (error) {
     console.log(["CREATE_POST", error])
-    return new NextResponse("Internal Error", {status:500})
+    return new NextResponse("Internal Error", { status: 500 })
   }
 }

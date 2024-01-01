@@ -21,7 +21,7 @@ const formSchema = z.object({
   })
 })
 
-export default function CommentDetail({comment,comments}) {
+export default function CommentDetail({ comment, comments }) {
   const [isEditing, setIsEditing] = useState(false);
   const toggleEdit = () => setIsEditing((current) => !current)
 
@@ -35,12 +35,12 @@ export default function CommentDetail({comment,comments}) {
   const { isSubmitting, isValid } = form.formState;
   const queryClient = useQueryClient()
   const editMutation = useMutation({
-    mutationFn: (body) =>{
+    mutationFn: (body) => {
       return axios.patch(`/api/blog/${comment.postId}/comments/${comment.id}`, body)
     }
   })
   const deleteMutation = useMutation({
-    mutationFn: () =>{
+    mutationFn: () => {
       // console.log(`/api/blog/${postId}/comments/${values.id}`)
       return axios.delete(`/api/blog/${comment.postId}/comments/${comment.id}`)
     }
@@ -52,7 +52,7 @@ export default function CommentDetail({comment,comments}) {
         if (c.id === comment.id) {
           // return {...c,...data.data}
           c.desc = values.desc
-          return {...c}
+          return { ...c }
         }
         return c;
       });
@@ -100,13 +100,13 @@ export default function CommentDetail({comment,comments}) {
         comments: oldData.comments.filter(c => c.id !== comment.id)
       };
     });
-    deleteMutation.mutate(null,   {
+    deleteMutation.mutate(null, {
       onSuccess: () => {
         toast.success("OK");
         // console.log(data)
-      //   // Update the cache
-      // Invalidate the query
-      queryClient.invalidateQueries(["post", comment.postId]);
+        //   // Update the cache
+        // Invalidate the query
+        queryClient.invalidateQueries(["post", comment.postId]);
       },
       onError: (error) => {
         queryClient.invalidateQueries(["post", comment.postId]);
@@ -123,26 +123,26 @@ export default function CommentDetail({comment,comments}) {
         <div className="flex items-center">
           <div className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
             <div className="h-6 w-6 relative mr-2">
-              <Image src={comment.user?.image || "https://github.com/shadcn.png"} alt="postimage" fill className="rounded-full object-cover"/>
+              <Image src={comment.user?.image || "https://github.com/shadcn.png"} alt="postimage" fill className="rounded-full object-cover" />
             </div>{comment.user?.name}</div>
-          <p className="text-sm text-gray-600 dark:text-gray-400"><FormattedDate data={comment.createdAt}/></p>
+          <p className="text-sm text-gray-600 dark:text-gray-400"><FormattedDate data={comment.createdAt} /></p>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant='ghost' className="h-4 w-8 p-0">
               <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4"/>
+              <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={toggleEdit}>
-                <Pencil className="h-4 w-4 mr-2"/>
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={onDelete}>
-                <Trash className="h-4 w-4 mr-2"/>
-                Delete
-              </DropdownMenuItem>
+            <DropdownMenuItem onClick={toggleEdit}>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={onDelete}>
+              <Trash className="h-4 w-4 mr-2" />
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -157,17 +157,17 @@ export default function CommentDetail({comment,comments}) {
             <FormField
               control={form.control}
               name="desc"
-              render={({field})=>(
+              render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Textarea disabled={isSubmitting} placeholder="Your Comment" {...field}/>
+                    <Textarea disabled={isSubmitting} placeholder="Your Comment" {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <div className="flex items-center gap-x-2">
-            <Button type="button" onClick={toggleEdit}>
+              <Button type="button" onClick={toggleEdit}>
                 Cancel
               </Button>
               <Button type="submit" disabled={!isValid || isSubmitting}>
@@ -186,10 +186,10 @@ export default function CommentDetail({comment,comments}) {
         </button>
       </div>
       <div>
-      {isReplying && (
-        <div className="ml-8">
-          <CommentForm postId={comment.postId} parentId={comment.id} isReply={true} setIsReplying={setIsReplying}/>
-        </div>
+        {isReplying && (
+          <div className="ml-8">
+            <CommentForm postId={comment.postId} parentId={comment.id} isReply={true} setIsReplying={setIsReplying} />
+          </div>
 
         )}
       </div>
@@ -197,7 +197,7 @@ export default function CommentDetail({comment,comments}) {
       {childComments.length !== 0 && (
         <div className="ml-4">
           {childComments.map((comment, index) => (
-            <AComment key={index} comment={comment}/>
+            <AComment key={index} comment={comment} />
           ))}
         </div>
       )}

@@ -15,7 +15,7 @@ export async function POST(req) {
     })
 
     if (existingUser) {
-      return new NextResponse("Email taken", {status:422})
+      return new NextResponse("Email taken", { status: 422 })
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -33,6 +33,6 @@ export async function POST(req) {
     return NextResponse.json(user)
   } catch (error) {
     console.log("[CREATE_USER]: ", error)
-    return new NextResponse("Internal error", {status:500})
+    return new NextResponse("Internal error", { status: 500 })
   }
 }

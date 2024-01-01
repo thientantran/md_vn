@@ -16,11 +16,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-          <SessionProvider session={session}>
-            <TanstackProvider>
-              {children}
-            </TanstackProvider>
-          </SessionProvider>
+        <SessionProvider session={session}>
+          <TanstackProvider>
+            {children}
+          </TanstackProvider>
+        </SessionProvider>
       </body>
     </html>
   )

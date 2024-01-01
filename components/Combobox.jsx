@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 
-export function Combobox({options, value, onChange}) {
+export function Combobox({ options, value, onChange }) {
   const [open, setOpen] = React.useState(false)
   // const [value, setValue] = React.useState("")
   return (

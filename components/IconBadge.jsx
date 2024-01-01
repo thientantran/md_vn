@@ -29,21 +29,21 @@ const iconVariants = cva(
         default: 'text-sky-700',
         success: 'text-emerald-700',
       },
-      size:{
+      size: {
         default: 'h-8 w-8',
         sm: 'h-4 w-4'
       }
     },
-    defaultVariants:{
+    defaultVariants: {
       variant: 'default',
       size: 'default'
     }
   }
 )
-export default function IconBadge({icon: Icon, variant, size}) {
+export default function IconBadge({ icon: Icon, variant, size }) {
   return (
-    <div className={cn(backgroundVariants({variant, size}))}>
-      <Icon className={cn(iconVariants({variant, size}))}/>
+    <div className={cn(backgroundVariants({ variant, size }))}>
+      <Icon className={cn(iconVariants({ variant, size }))} />
     </div>
   )
 }

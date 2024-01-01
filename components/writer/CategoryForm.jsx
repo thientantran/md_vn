@@ -17,7 +17,7 @@ const formSchema = z.object({
   categoryId: z.string().min(1)
 })
 
-export default function CategoryForm({initialData, postId, options}) {
+export default function CategoryForm({ initialData, postId, options }) {
   const [isEditing, setIsEditing] = useState(false)
   const toggleEdit = () => setIsEditing((current) => !current)
 
@@ -28,7 +28,7 @@ export default function CategoryForm({initialData, postId, options}) {
     }
   })
 
-  const {isSubmitting, isValid} = form.formState;
+  const { isSubmitting, isValid } = form.formState;
 
   const router = useRouter()
   const onSubmit = async (values) => {
@@ -56,7 +56,7 @@ export default function CategoryForm({initialData, postId, options}) {
               <>Cancel</>
             ) : (
               <>
-                <Pencil className='h-4 w-4 mr-2'/>
+                <Pencil className='h-4 w-4 mr-2' />
                 Edit Category
               </>
             )
@@ -66,7 +66,7 @@ export default function CategoryForm({initialData, postId, options}) {
       {
         !isEditing && (
           <p className={cn('text-sm mt-2', !initialData.categoryId && 'text-slate-500 italic')}>
-            {selectedOption?.label|| 'No Category'}
+            {selectedOption?.label || 'No Category'}
           </p>
         )
       }
@@ -77,12 +77,12 @@ export default function CategoryForm({initialData, postId, options}) {
               <FormField
                 control={form.control}
                 name='categoryId'
-                render={({field}) => (
+                render={({ field }) => (
                   <FormItem>
                     <FormControl>
-                      <Combobox options={options} {...field}/>
+                      <Combobox options={options} {...field} />
                     </FormControl>
-                    <FormMessage/>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

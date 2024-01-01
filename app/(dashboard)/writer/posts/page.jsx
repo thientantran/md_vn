@@ -6,12 +6,12 @@ import { getServerSession } from "next-auth";
 
 export default async function page() {
   const session = getServerSession(authOptions)
-  if(!session){
+  if (!session) {
     return redirect("/")
   }
   const posts = await prismadb.post.findMany({
     orderBy: {
-      createdAt:'desc'
+      createdAt: 'desc'
     },
   })
   return (
