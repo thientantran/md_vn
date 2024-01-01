@@ -8,6 +8,6 @@ export default function FormattedDate({ data }) {
     day: 'numeric',
   });
   return (
-    <div>{formattedDate}</div>
+    <>{formattedDate}</>
   )
 }

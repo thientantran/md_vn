@@ -1,18 +1,17 @@
-'use client'
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate";
 import Preview from "../Preview";
 
 export default function BlogPostDetail({ post }) {
-  const [isClient, setIsClient] = useState(false);
+  // const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  if (!isClient) {
-    return null;
-  }
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
+  // if (!isClient) {
+  //   return null;
+  // }
+
   return (
     <div>
       <header className="mb-4 lg:mb-6 not-format">
@@ -24,7 +23,9 @@ export default function BlogPostDetail({ post }) {
             <div>
               <a href="#" rel="author" className="text-xl font-bold text-gray-900 dark:text-white">{post.user?.name}</a>
               <p className="text-base text-gray-500 dark:text-gray-400">{post.userEmail}</p>
-              <p className="text-base text-gray-500 dark:text-gray-400"><time pubdate dateTime="2022-02-08" title="February 8th, 2022"><FormattedDate data={post.createdAt} /></time></p>
+              <p className="text-base text-gray-500 dark:text-gray-400">
+                <FormattedDate data={post.createdAt} />
+              </p>
             </div>
           </div>
         </address>
